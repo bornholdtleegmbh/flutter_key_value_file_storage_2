@@ -1,3 +1,7 @@
+## 0.1.1 - 17/03/2026
+### Updated
+* Dependency updates
+
 ## 0.1.0 - 13/02/2025
 ### Updated
 * Dependency updates
