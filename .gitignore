@@ -33,6 +33,8 @@
 # Android related
 **/android/**/gradle-wrapper.jar
 **/android/.gradle
+**/android/.kotlin/
+**/android/build/
 **/android/captures/
 **/android/gradlew
 **/android/gradlew.bat
@@ -91,6 +93,9 @@
 Gemfile.lock
 
 # Fvm
-.fvm/flutter_sdk
 /lib/generated_plugin_registrant.dart
 /test/coverage_helper_test.dart
+
+# FVM Version Cache
+.fvm/
+!.fvmrc

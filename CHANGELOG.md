@@ -1,3 +1,12 @@
+## NEXT
+### Breaking
+* Require Flutter 3.41, Dart 3.11, Android API 24, and iOS 13 or newer
+
+### Updated
+* Compile Android sources against API 36
+* Support AGP Built-in Kotlin while retaining conditional KGP support for AGP versions before 9
+* Add Swift Package Manager support for iOS while retaining CocoaPods support
+
 ## 0.1.1 - 17/03/2026
 ### Updated
 * Dependency updates
