@@ -30,18 +30,14 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Flutter file storage app'),
-        ),
+        appBar: AppBar(title: const Text('Flutter file storage app')),
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Column(
               children: [
                 TextField(
-                  decoration: const InputDecoration(
-                    labelText: 'Key',
-                  ),
+                  decoration: const InputDecoration(labelText: 'Key'),
                   onChanged: (value) {
                     setState(() {
                       _key = value;
@@ -49,9 +45,7 @@ class _MyAppState extends State<MyApp> {
                   },
                 ),
                 TextField(
-                  decoration: const InputDecoration(
-                    labelText: 'Content',
-                  ),
+                  decoration: const InputDecoration(labelText: 'Content'),
                   onChanged: (value) {
                     setState(() {
                       _content = value;

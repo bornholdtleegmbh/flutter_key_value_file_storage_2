@@ -20,11 +20,7 @@ abstract class FileStorageManager {
   /// FlutterFileStorage will use
   ///   - storage to save the keys
   ///   - fileStorage to save, read, delete the file
-  FileStorageManager(
-    FlutterSecureStorage storage, {
-    required String keysStorageKey,
-    FileStorage? fileStorage,
-  }) {
+  FileStorageManager(FlutterSecureStorage storage, {required String keysStorageKey, FileStorage? fileStorage}) {
     _keyValueStorage = KeyValueStorage(storage, keysStorageKey: keysStorageKey);
     this.fileStorage = fileStorage ?? DocumentsFileStorage();
   }
@@ -34,18 +30,12 @@ abstract class FileStorageManager {
   /// If the key was already in the storage, its associated value is changed.
   /// If the value is null, deletes associated value for the given [key].
   /// Supports String and Uint8List values.
-  Future<void> write<T>({
-    required String key,
-    required T? value,
-  }) async {
+  Future<void> write<T>({required String key, required T? value}) async {
     assert(key.isNotEmpty, 'key must not be empty');
     await _synchronized(key, () async {
       if (value == null) return delete(key: key);
-      assert(
-          T == String || T == Uint8List, 'value must be String or Uint8List');
-      final convertedValue = (value is String)
-          ? Uint8List.fromList(utf8.encode(value))
-          : value as Uint8List;
+      assert(T == String || T == Uint8List, 'value must be String or Uint8List');
+      final convertedValue = (value is String) ? Uint8List.fromList(utf8.encode(value)) : value as Uint8List;
       await performWrite(key: key, value: convertedValue);
       await _getKeys();
       _keys.add(key);
@@ -67,9 +57,7 @@ abstract class FileStorageManager {
   }
 
   /// Returns true if the storage contains the given [key].
-  Future<bool> containsKey({
-    required String key,
-  }) async {
+  Future<bool> containsKey({required String key}) async {
     assert(key.isNotEmpty, 'key must not be empty');
     return _synchronized(key, () async {
       await _getKeys();
@@ -81,9 +69,7 @@ abstract class FileStorageManager {
   /// Deletes associated value for the given [key].
   ///
   /// All associated data for the given key is removed
-  Future<void> delete({
-    required String key,
-  }) async {
+  Future<void> delete({required String key}) async {
     assert(key.isNotEmpty, 'key must not be empty');
     await _synchronized(key, () async {
       await performDelete(key: key);
@@ -116,20 +102,14 @@ abstract class FileStorageManager {
     _keys = decodedData.map((e) => utf8.decode(base64Decode(e))).toSet();
   }
 
-  Future<T> _synchronized<T>(
-    String key,
-    FutureOr<T> Function() computation,
-  ) async {
-    final lock = await _locksLock.synchronized(
-        () => _locks.putIfAbsent(key, () => Lock(reentrant: true)));
+  Future<T> _synchronized<T>(String key, FutureOr<T> Function() computation) async {
+    final lock = await _locksLock.synchronized(() => _locks.putIfAbsent(key, () => Lock(reentrant: true)));
     try {
       final result = await lock.synchronized(() => computation.call());
-      await _locksLock
-          .synchronized(() => _locks.removeWhere((_, value) => value == lock));
+      await _locksLock.synchronized(() => _locks.removeWhere((_, value) => value == lock));
       return result;
     } finally {
-      await _locksLock
-          .synchronized(() => _locks.removeWhere((_, value) => value == lock));
+      await _locksLock.synchronized(() => _locks.removeWhere((_, value) => value == lock));
     }
   }
 

@@ -13,13 +13,8 @@ class FlutterKeyValueFileStorage {
   /// FlutterFileStorage will use
   ///   - storage to save the keys
   ///   - fileStorage to save, read, delete the file
-  FlutterKeyValueFileStorage(
-    FlutterSecureStorage storage, {
-    FileStorage? fileStorage,
-    String? keysStorageKey,
-  }) {
-    fileStorageManager = FlutterFileStorageManager(storage,
-        fileStorage: fileStorage, keysStorageKey: keysStorageKey);
+  FlutterKeyValueFileStorage(FlutterSecureStorage storage, {FileStorage? fileStorage, String? keysStorageKey}) {
+    fileStorageManager = FlutterFileStorageManager(storage, fileStorage: fileStorage, keysStorageKey: keysStorageKey);
   }
 
   /// Saved the given [value] with [key]
@@ -27,10 +22,7 @@ class FlutterKeyValueFileStorage {
   /// If the key was already in the storage, its associated value is changed.
   /// If the value is null, deletes associated value for the given [key].
   /// Supports String and Uint8List values.
-  Future<void> write<T>({
-    required String key,
-    required T? value,
-  }) async {
+  Future<void> write<T>({required String key, required T? value}) async {
     await fileStorageManager.write<T>(key: key, value: value);
   }
 
@@ -42,17 +34,12 @@ class FlutterKeyValueFileStorage {
   }
 
   /// Returns true if the storage contains the given [key].
-  Future<bool> containsKey({
-    required String key,
-  }) async =>
-      fileStorageManager.containsKey(key: key);
+  Future<bool> containsKey({required String key}) async => fileStorageManager.containsKey(key: key);
 
   /// Deletes associated value for the given [key].
   ///
   /// All associated data for the given key is removed
-  Future<void> delete({
-    required String key,
-  }) async {
+  Future<void> delete({required String key}) async {
     await fileStorageManager.delete(key: key);
   }
 

@@ -7,15 +7,11 @@ import 'package:flutter_key_value_file_storage/src/file_storage_manager/file_sto
 class FlutterFileStorageManager extends FileStorageManager {
   static const _keysStorageKeyDefault = 'flutter_key_value_file_storage_keys';
 
-  FlutterFileStorageManager(
-    super.storage, {
-    super.fileStorage,
-    String? keysStorageKey,
-  }) : super(keysStorageKey: keysStorageKey ?? _keysStorageKeyDefault);
+  FlutterFileStorageManager(super.storage, {super.fileStorage, String? keysStorageKey})
+    : super(keysStorageKey: keysStorageKey ?? _keysStorageKeyDefault);
 
   @override
-  Future<void> performWrite(
-      {required String key, required Uint8List value}) async {
+  Future<void> performWrite({required String key, required Uint8List value}) async {
     await fileStorage.write(_filename(key), value);
   }
 
@@ -25,8 +21,7 @@ class FlutterFileStorageManager extends FileStorageManager {
   }
 
   @override
-  Future<bool> performContainsKey({required String key}) =>
-      fileStorage.exists(_filename(key));
+  Future<bool> performContainsKey({required String key}) => fileStorage.exists(_filename(key));
 
   @override
   Future<void> performDelete({required String key}) async {

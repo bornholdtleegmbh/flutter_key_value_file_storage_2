@@ -7,8 +7,7 @@ import 'package:path_provider/path_provider.dart';
 class DocumentsFileStorage extends FileStorage {
   String? _outputPath;
 
-  Future<String> get documentsPath async =>
-      (await getApplicationDocumentsDirectory()).path;
+  Future<String> get documentsPath async => (await getApplicationDocumentsDirectory()).path;
 
   /// By default the files are saved under the root of your app documents folder.
   /// You could use a custom output path to save the file somewhere else in your app documents folder.

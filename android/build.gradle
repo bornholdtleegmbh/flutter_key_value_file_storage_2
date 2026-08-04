@@ -1,39 +1,49 @@
-group 'com.icapps.flutter_key_value_file_storage'
-version '1.0.0'
+plugins {
+    id 'com.android.library'
+}
 
-rootProject.allprojects {
+group 'com.icapps.flutter_key_value_file_storage'
+version '1.0-SNAPSHOT'
+
+allprojects {
     repositories {
         google()
         mavenCentral()
     }
 }
 
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+def agpMajor = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION.tokenize('.')[0] as int
+def kotlinExtensionType = org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
+
+if (agpMajor < 9 || project.extensions.findByType(kotlinExtensionType) == null) {
+    apply plugin: 'kotlin-android'
+}
 
 android {
     namespace 'com.icapps.flutter_key_value_file_storage'
-    compileSdk 34
+    compileSdk 36
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
     defaultConfig {
-        minSdkVersion 16
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        minSdkVersion 24
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
-    lintOptions {
+    lint {
         disable 'InvalidPackage'
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
+}
 
-    kotlinOptions {
-        jvmTarget = '1.8'
+project.extensions.configure(kotlinExtensionType) { kotlinExtension ->
+    kotlinExtension.compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
     }
 }
