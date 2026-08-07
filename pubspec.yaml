@@ -11,7 +11,7 @@ dependencies:
   device_info_plus: ^13.2.0
   flutter:
     sdk: flutter
-  flutter_secure_storage: ^10.3.1
+  flutter_secure_storage: ^11.0.0
   path: ^1.9.1
   path_provider: ^2.1.6
   synchronized: ">=3.4.0 <4.0.0"
