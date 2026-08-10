@@ -11,8 +11,8 @@ dependencies:
     sdk: flutter
   flutter_key_value_file_storage:
     path: ../
-  flutter_secure_storage: ^10.0.0
-  cupertino_icons: ^1.0.8
+  flutter_secure_storage: ^11.0.0
+  cupertino_icons: ^1.0.9
 
 dev_dependencies:
   flutter_test:
